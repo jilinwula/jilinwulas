@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--<bean id="greetingAfter" class="com.jilinwula.aop.advice.GreetingAfterAdvice"/>
+    <bean id="greetingBefore" class="com.jilinwula.aop.advice.GreetingBeforeAdvice"/>
+    <bean id="greetingAround" class="com.jilinwula.aop.advice.GreetingInterceptor"/>
+    <bean id="target" class="com.jilinwula.aop.advice.NaiveWaiter"/>
+    <bean id="seller" class="com.jilinwula.aop.advice.Seller"/>-->
+    <!-- 使用jdk代理-->
+    <!--<bean id="waiter" class="org.springframework.aop.framework.ProxyFactoryBean"
+          p:proxyInterfaces="com.jilinwula.aop.advice.Waiter"
+          p:interceptorNames="greetingAround"
+          p:target-ref="target"/>-->
+    <!--p:interceptorNames="greetingBefore,greetingAfter"-->
+    <!-- 使用CGLib代理
+    <bean id="waiter" class="org.springframework.aop.framework.ProxyFactoryBean"
+          p:interceptorNames="greetingAdvice"
+          p:target-ref="target"
+          p:proxyTargetClass="true"
+    />-->
+
+   <!-- 自动创建代理
+   <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator"
+          p:beanNames="target"
+          p:interceptorNames="greetingAfter"
+          p:optimize="true"/> 强制使用CGLib代理技术 -->
+    <!--<bean id="regexpAdvisor" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor"
+          p:patterns=".*greet.*"
+          p:advice-ref="greetingAfter"/>
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"/>-->
+   <!-- <aop:aspectj-autoproxy proxy-target-class="true" />&lt;!&ndash; 默认proxy-target-class为false使用jdk代理ture使用CGLib代理
+    使用jdk代理目标类必须生为为借口 基于AspectJ切面的驱动器 &ndash;&gt;
+    <bean id="waiter" class="com.jilinwula.aop.advice.NaiveWaiter"/>&lt;!&ndash; 目标bean &ndash;&gt;
+    <bean class="com.jilinwula.aop.aspectj.PreGreetingAspect"/>&lt;!&ndash; 注解的切面类 &ndash;&gt;
+    <bean class="org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator"/> 自动创建代理-->
+
+    <!--<aop:config proxy-target-class="true">
+        <aop:aspect ref="adviceMethods">
+            &lt;!&ndash;<aop:before method="preGreeting" pointcut="target(com.jilinwula.aop.advice.NaiveWaiter) and execution(* greetTo(..))"/>&ndash;&gt;
+            <aop:pointcut id="greetToPoinctcut" expression="target(com.jilinwula.aop.advice.NaiveWaiter) and execution(* greetTo(..))"/>
+            <aop:before method="preGreeting" pointcut-ref="greetToPoinctcut"/>
+        </aop:aspect>
+    </aop:config>-->
+   <!-- <aop:config proxy-target-class="true">
+        <aop:pointcut id="greetToPoinctcut" expression="target(com.jilinwula.aop.advice.NaiveWaiter) and execution(* greetTo(..))"/>
+        <aop:aspect ref="adviceMethods">
+            <aop:before method="preGreeting" pointcut-ref="greetToPoinctcut"/>
+        </aop:aspect>
+        <aop:aspect ref="adviceMethods">
+            <aop:after method="preGreeting" pointcut-ref="greetToPoinctcut"/>
+        </aop:aspect>
+    </aop:config>-->
+    <!--<aop:config proxy-target-class="true">
+        <aop:aspect ref="adviceMethods">
+            <aop:after-returning method="afterRetruning" pointcut="target(com.jilinwula.aop.advice.NaiveWaiter)" returning="retVal"/>
+        </aop:aspect>
+    </aop:config>-->
+    <!--<aop:config proxy-target-class="true">
+        <aop:aspect ref="adviceMethods">
+            <aop:around method="aroundMethod" pointcut="execution(* serveTo(..))"/>
+        </aop:aspect>
+    </aop:config>-->
+    <!--<aop:config proxy-target-class="true">
+        <aop:aspect ref="adviceMethods">
+            <aop:after-throwing method="afterThrowingMethod" pointcut="target(com.jilinwula.aop.advice.NaiveWaiter)" throwing="iae"/>
+        </aop:aspect>
+    </aop:config>-->
+    <bean id="adviceMethods" class="com.jilinwula.aop.aspectj.AdviceMethods"/>
+    <bean id="waiter" class="com.jilinwula.aop.advice.NaiveWaiter"/>
+
+</beans>

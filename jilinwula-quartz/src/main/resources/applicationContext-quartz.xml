@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <!--<bean id="jobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean"
+          p:jobClass="com.jilinwula.quartz.MyJob"
+          p:applicationContextJobDataKey="applicationContext">
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="size" value="10"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="jobDetail_1" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"
+          p:targetObject-ref="myService"
+          p:targetMethod="doJob"
+          p:concurrent="false"
+    />
+
+    <bean id="myService" class="com.jilinwula.quartz.MyService"/>
+
+    <bean id="simpleTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean"
+          p:jobDetail-ref="jobDetail"
+          p:startDelay="1000"
+          p:repeatInterval="2000"
+          p:repeatCount="100">
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="count" value="10"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="checkImagesTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean"
+          p:jobDetail-ref="jobDetail"
+          p:cronExpression="0/5 * * * * * ?"/>
+
+    <bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean="simpleTrigger"/>
+            </list>
+        </property>
+        <property name="schedulerContextAsMap">
+            <map>
+                <entry key="timeout" value="30"/>
+            </map>
+        </property>
+    </bean>-->
+
+    <bean id="timerTask" class="com.jilinwula.quartz.SimpleTimerTask"/>
+    <bean id="scheduledTask" class="org.springframework.scheduling.timer.ScheduledTimerTask"
+          p:timerTask-ref="timerTask"
+          p:delay="1000"
+          p:period="1000"
+    />
+
+
+</beans>

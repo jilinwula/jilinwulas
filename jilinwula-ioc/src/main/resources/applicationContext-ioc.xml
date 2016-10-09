@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+
+    <!--属性注入,必须有默认构造函数及属性的set方法-->
+  <!-- <bean id="car" class="com.jilinwula.ioc.model.Car"
+         p:brand="宝来"
+         p:color="白色"
+         p:maxSpeed="200000"/>-->
+
+ <!--  构造函数注入 按类型匹配入参
+ <bean id="car" class="com.jilinwula.ioc.model.Car">
+      <constructor-arg type="java.lang.String">
+         <value>宝来</value>
+      </constructor-arg>
+      <constructor-arg type="double">
+         <value>20000</value>
+      </constructor-arg>
+   </bean>
+
+  <!- 构造函数注入 按参数索引
+   <bean id="car" class="com.jilinwula.ioc.model.Car">
+      <constructor-arg index="0" value="宝来"/>
+      <constructor-arg index="1" value="大众"/>
+      <constructor-arg index="2" value="20000"/>
+   </bean>-->
+
+  <!-- 构造函数注入 按参数索引+类型匹配
+
+  <bean id="car" class="com.jilinwula.ioc.model.Car">
+      <constructor-arg index="0" type="java.lang.String" value="宝来"/>
+      <constructor-arg index="1" type="java.lang.String" value="大众"/>
+      <constructor-arg index="2" type="int" value="20000"/>
+   </bean>-->
+
+   <!--<bean id="boss" class="com.jilinwula.ioc.model.Boss">
+      <constructor-arg>
+         <value>bing</value>
+      </constructor-arg>
+      <constructor-arg>
+         <ref bean="car"/>
+      </constructor-arg>
+      <constructor-arg>
+         <ref bean="office"/>
+      </constructor-arg>
+   </bean>
+   <bean id="car" class="com.jilinwula.ioc.model.Car"/>
+   <bean id="office" class="com.jilinwula.ioc.model.Office"/>-->
+
+   <!--<bean id="car" class="com.jilinwula.ioc.model.Car">
+      <constructor-arg index="0" value="宝来"/>
+      <constructor-arg index="1" ref="boss"/>
+   </bean>
+
+   <bean id="boss" class="com.jilinwula.ioc.model.Boss">
+      <constructor-arg index="0" value="bing"/>
+      <constructor-arg index="1" ref="car"/>
+   </bean>-->
+  <!-- <bean id="car" class="com.jilinwula.ioc.model.Car"
+      p:brand="1"/>
+   <bean id="boss" class="com.jilinwula.ioc.model.Boss"
+         p:car-ref="car"/>-->
+   <!--<bean id="boss" class="com.jilinwula.ioc.model.Boss">
+      <property name="favorites">
+         <list>
+            <value>足球</value>
+            <value>篮球</value>
+            <value>台球</value>
+         </list>
+      </property>
+      <property name="jobs">
+         <map>
+            <entry>
+               <key>
+                  <value>AM</value>
+               </key>
+               <value>开会</value>
+            </entry>
+            <entry>
+               <key>
+                  <value>PM</value>
+               </key>
+               <value>调研</value>
+            </entry>
+         </map>
+      </property>
+      <property name="mails">
+         <props>
+            <prop key="jobMail">jilinwula@foxmail.com</prop>
+            <prop key="lifeMail">ibic@vip.qq.com</prop>
+         </props>
+      </property>
+   </bean>-->
+
+   <!-- 只扫描ioc包里的类
+   <context:component-scan base-package="com.jilinwula" resource-pattern="ioc/*.class"/> -->
+
+   <!-- <context:include-filter>包含的目标类
+   <context:exclude-filter>排除的目标类
+   <context:component-scan base-package="com.jilinwula">
+      <context:include-filter type="regex" expression="com.jilinwula.ioc.model.*"/>
+      <context:exclude-filter type="aspectj" expression="com.jilinwula..*Controller"/>
+   </context:component-scan>-->
+
+   <!--<bean id="onePlugin" class="com.jilinwula.ioc.bean.OnePlugin"/>
+   <bean id="twoPlugin" class="com.jilinwula.ioc.bean.TwoPlugin"/>
+   <bean id="myComponent" class="com.jilinwula.ioc.bean.MyComponent"/>-->
+
+   <!-- <bean id="car" class="com.jilinwula.ioc.bean.Car"
+          init-method="myInit"
+          destroy-method="myDestroy"
+          p:brand="宝来"
+          p:maxSpeed="200"
+          scope="prototype"
+    />-->
+
+   <!-- <bean id="car" class="com.jilinwula.ioc.model.Car"
+          p:brand="宝来"
+          p:maxSpeed="200"
+          scope="prototype"
+    />
+
+    &lt;!&ndash;<bean id="myBeanPostProcessor" class="com.jilinwula.ioc.bean.MyBeanPostProcessor"/>&ndash;&gt;
+
+    <bean id="myBeanFactoryPostProcessor" class="com.jilinwula.ioc.bean.MyBeanFactoryPostProcessor"/>-->
+
+    <!--<bean id="carFactory" class="com.jilinwula.ioc.bean.CarFactory"/>
+
+    <bean id="car" factory-bean="carFactory" factory-method="createBaolaiCar"/>-->
+
+    <!--<bean id="car" class="com.jilinwula.ioc.bean.CarFactory" factory-method="createBaomaCar"/>-->
+
+    <!--<bean id="car" class="com.jilinwula.ioc.model.Car"
+          p:brand="捷豹"
+          p:color="白色"
+          p:price="2000"
+          scope="prototype"
+    />
+
+    <bean id="magicBoss" class="com.jilinwula.ioc.model.MagicBoss">
+        <lookup-method name="getCar" bean="car"/>
+    </bean>-->
+
+    <!--  方法替换 -->
+    <!--<bean id="boss1" class="com.jilinwula.ioc.model.Boss1">
+        <replaced-method name="getCar" replacer="boss2"/>
+    </bean>
+    <bean id="boss2" class="com.jilinwula.ioc.model.Boss2"/>-->
+
+    <!--<bean id="abstractCar" class="com.jilinwula.ioc.model.Car"
+          p:brand="捷豹"
+          p:color="白色"
+          p:price="2000"
+          abstract="true"
+    />
+
+    <bean id="car1" p:color="黑色" depends-on="" parent="abstractCar"/>
+
+    <bean id="car2" p:color="红色" parent="abstractCar"/>-->
+
+    <!-- 不会提前初始化 -->
+    <!--<bean id="car" class="com.jilinwula.ioc.model.Car" scope="singleton" lazy-init="true"/>-->
+
+    <context:component-scan base-package="com.jilinwula.ioc.plugin"/>
+
+</beans>
